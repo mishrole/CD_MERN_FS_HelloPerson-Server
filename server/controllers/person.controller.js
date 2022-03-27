@@ -14,6 +14,13 @@ module.exports.createPerson = (request, response) => {
     firstName,
     lastName
   })
-  .then(person => response.json(person))
-  .catch(err => response.json(err));
+  .then(person => response.json({
+    person: person
+  }))
+  .catch(err =>
+    response.status(422).json({
+      message: 'Something went wrong',
+      error: err
+    })
+  );
 }
